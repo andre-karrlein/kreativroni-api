@@ -44,7 +44,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 
 	if key != app_key && key != products_key {
 		response.StatusCode = http.StatusBadGateway
-		response.Body = string("Invalid APP Key!")
+		response.Body = string("Invalid APP Key!" + key + " " + app_key)
 
 		return response, nil
 	}

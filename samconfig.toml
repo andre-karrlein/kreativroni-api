@@ -7,5 +7,5 @@ s3_bucket = "kreativroni-api"
 region = "eu-central-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
-parameter_overrides = "VaultToken=\"default\" APIKEY=\"${{ secrets.API_KEY }}\" APPKEY=\"${{ secrets.APP_KEY }}\" ProductsKEY=\"${{ secrets.PRODUCTS_KEY }}\""
+parameter_overrides = "VaultToken=\"default\" APIKEY=${{ secrets.API_KEY }} APPKEY=${{ secrets.APP_KEY }} ProductsKEY=${{ secrets.PRODUCTS_KEY }}"
 image_repositories = []
