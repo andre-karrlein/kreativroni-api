@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "kreativroni API."
+Transform: "AWS::Serverless-2016-10-31"
+
+
+Parameters:
+  VaultToken:
+    Type: "String"
+
+
+Globals:
+  Function:
+    Handler: "main"
+    Timeout: 10
+    Runtime: "go1.x"
+
+
+Resources:
+
+  products:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "cmd/products"
+      Environment:
+        Variables:
+          API_KEY:
+          APP_KEY:
+          PRODUCTS_KEY:
+      Events:
+        ApiEvent:
+          Type: "HttpApi"
+        Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/products"
+            Method: "get"
