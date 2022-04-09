@@ -67,7 +67,7 @@ Resources:
             Path: "/api/v1/sections"
             Method: "get"
   
-  product-variations:
+  productVariations:
     Type: "AWS::Serverless::Function"
     Properties:
       CodeUri: "cmd/product-variations"
