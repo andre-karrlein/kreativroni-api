@@ -20,4 +20,4 @@ jobs:
       # Build using SAM
       - run: export PRODUCTS_KEY=${{ secrets.PRODUCTS_KEY }} && export APP_KEY=${{ secrets.APP_KEY }} && export API_KEY=${{ secrets.API_KEY }} && sam build
       # Deploy on AWS
-      - run: export PRODUCTS_KEY=${{ secrets.PRODUCTS_KEY }} && export APP_KEY=${{ secrets.APP_KEY }} && export API_KEY=${{ secrets.API_KEY }} && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name kreativroni-api --s3-bucket kreativroni-api --capabilities CAPABILITY_IAM --region eu-central-1
+      - run: export PRODUCTS_KEY=${{ secrets.PRODUCTS_KEY }} && export APP_KEY=${{ secrets.APP_KEY }} && export API_KEY=${{ secrets.API_KEY }} && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --config-file samconfig.toml

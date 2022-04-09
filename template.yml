@@ -11,6 +11,11 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: "kreativroni API project."
 Transform: "AWS::Serverless-2016-10-31"
 
+Parameters:
+  VaultToken:
+    Type: "String"
+    Default: "default"
+
 Globals:
   Function:
     Handler: "main"
