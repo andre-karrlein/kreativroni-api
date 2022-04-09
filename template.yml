@@ -15,6 +15,12 @@ Parameters:
   VaultToken:
     Type: "String"
     Default: "default"
+  APIKEY:
+    Type: "String"
+  APPKEY:
+    Type: "String"
+  ProductsKEY:
+    Type: "String"
 
 Globals:
   Function:
@@ -31,9 +37,9 @@ Resources:
       CodeUri: "cmd/products"
       Environment:
         Variables:
-          API_KEY:
-          APP_KEY:
-          PRODUCTS_KEY:
+          API_KEY: !Ref APIKEY
+          APP_KEY: !Ref APPKEY
+          PRODUCTS_KEY: !Ref ProductsKEY
       Events:
         ApiEvent:
           Type: "HttpApi"

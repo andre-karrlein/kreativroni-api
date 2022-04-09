@@ -20,6 +20,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-central-1
       # Build using SAM
-      - run: export PRODUCTS_KEY=${{ secrets.PRODUCTS_KEY }} && export APP_KEY=${{ secrets.APP_KEY }} && export API_KEY=${{ secrets.API_KEY }} && sam build
+      - run: sam build
       # Deploy on AWS
-      - run: export PRODUCTS_KEY=${{ secrets.PRODUCTS_KEY }} && export APP_KEY=${{ secrets.APP_KEY }} && export API_KEY=${{ secrets.API_KEY }} && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --config-file samconfig.toml
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --config-file samconfig.toml
