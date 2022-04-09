@@ -66,7 +66,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 
 	response.StatusCode = http.StatusOK
 	response.Body = string(data)
-	response.Headers["Access-Control-Allow-Origin"] = "*"
+	response.Headers = map[string]string{"Access-Control-Allow-Origin": "*"}
 
 	return response, nil
 }
