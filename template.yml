@@ -82,5 +82,5 @@ Resources:
         Api:
           Type: "Api"
           Properties:
-            Path: "/api/v1/product/variations"
+            Path: "/api/v1/variations"
             Method: "get"
