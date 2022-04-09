@@ -57,12 +57,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 		return response, nil
 	}
 
-	productsJSON, err := json.Marshal(loadProducts(language))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	data, err := json.MarshalIndent(productsJSON, "", "    ")
+	data, err := json.MarshalIndent(loadProducts(language), "", "    ")
 	if err != nil {
 		handler.logger.Print("Failed to JSON marshal response.\nError: %w", err)
 		response.StatusCode = http.StatusInternalServerError
