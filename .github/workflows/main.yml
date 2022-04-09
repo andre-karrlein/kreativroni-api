@@ -22,4 +22,4 @@ jobs:
       # Build using SAM
       - run: sam build
       # Deploy on AWS
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --config-file samconfig.toml
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --config-file samconfig.toml  --parameter-overrides "VaultToken=default APIKEY=${{ secrets.API_KEY }} APPKEY=${{ secrets.APP_KEY }} ProductsKEY=${{ secrets.PRODUCTS_KEY }}"
