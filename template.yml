@@ -77,5 +77,21 @@ Resources:
         Api:
           Type: "Api"
           Properties:
-            Path: "/api/v1/product/variations"
+            Path: "/api/v1/variations"
+            Method: "get"
+
+  news:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "cmd/news"
+      Environment:
+        Variables:
+          API_KEY: !Ref APIKEY
+          APP_KEY: !Ref APPKEY
+          PRODUCTS_KEY: !Ref ProductsKEY
+      Events:
+        Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/news"
             Method: "get"
