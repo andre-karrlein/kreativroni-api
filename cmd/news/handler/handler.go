@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -14,7 +15,9 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 
+	"github.com/andre-karrlein/kreativroni-api/model"
 	"github.com/andre-karrlein/kreativroni-api/util"
 )
 
@@ -50,9 +53,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 		return response, nil
 	}
 
-	getAllNews(handler)
-
-	data, err := json.MarshalIndent("", "", "    ")
+	data, err := json.MarshalIndent(getAllNews(handler), "", "    ")
 	if err != nil {
 		handler.logger.Print("Failed to JSON marshal response.\nError: %w", err)
 		response.StatusCode = http.StatusInternalServerError
@@ -65,7 +66,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 	return response, nil
 }
 
-func getAllNews(handler lambdaHandler) {
+func getAllNews(handler lambdaHandler) []model.News {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -80,5 +81,16 @@ func getAllNews(handler lambdaHandler) {
 		panic(err)
 	}
 
-	handler.logger.Print(out.Items)
+	news := []model.News{}
+	for _, s := range out.Items {
+		item := model.News{}
+
+		err = dynamodbattribute.UnmarshalMap(s, &item)
+		if err != nil {
+			panic(fmt.Sprintf("Failed to unmarshal Record, %v", err))
+		}
+		news = append(news, item)
+	}
+
+	return news
 }
