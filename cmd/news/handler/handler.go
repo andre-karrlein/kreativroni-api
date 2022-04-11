@@ -50,7 +50,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 		return response, nil
 	}
 
-	getAllNews()
+	getAllNews(handler)
 
 	data, err := json.MarshalIndent("", "", "    ")
 	if err != nil {
@@ -65,7 +65,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 	return response, nil
 }
 
-func getAllNews() {
+func getAllNews(handler lambdaHandler) {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -80,5 +80,5 @@ func getAllNews() {
 		panic(err)
 	}
 
-	println(out.Items)
+	handler.logger.Print(out.Items)
 }
