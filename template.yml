@@ -90,7 +90,12 @@ Resources:
           APP_KEY: !Ref APPKEY
           PRODUCTS_KEY: !Ref ProductsKEY
       Events:
-        Api:
+        - Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/news"
+            Method: "get"
+        - Api:
           Type: "Api"
           Properties:
             Path: "/api/v1/news/{id}"
@@ -138,7 +143,12 @@ Resources:
           APP_KEY: !Ref APPKEY
           PRODUCTS_KEY: !Ref ProductsKEY
       Events:
-        Api:
+        - Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/orders"
+            Method: "get"
+        - Api:
           Type: "Api"
           Properties:
             Path: "/api/v1/orders/{id}"
