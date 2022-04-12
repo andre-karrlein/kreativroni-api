@@ -93,6 +93,11 @@ Resources:
         Api:
           Type: "Api"
           Properties:
+            Path: "/api/v1/news"
+            Method: "get"
+        ApiParam:
+          Type: "Api"
+          Properties:
             Path: "/api/v1/news/{id}"
             Method: "get"
 
@@ -139,6 +144,11 @@ Resources:
           PRODUCTS_KEY: !Ref ProductsKEY
       Events:
         Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/orders"
+            Method: "get"
+        ApiParam:
           Type: "Api"
           Properties:
             Path: "/api/v1/orders/{id}"
