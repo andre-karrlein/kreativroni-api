@@ -95,7 +95,7 @@ Resources:
           Properties:
             Path: "/api/v1/news"
             Method: "get"
-        Api:
+        ApiParam:
           Type: "Api"
           Properties:
             Path: "/api/v1/news/{id}"
@@ -148,7 +148,7 @@ Resources:
           Properties:
             Path: "/api/v1/orders"
             Method: "get"
-        Api:
+        ApiParam:
           Type: "Api"
           Properties:
             Path: "/api/v1/orders/{id}"
