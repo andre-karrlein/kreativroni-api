@@ -93,5 +93,37 @@ Resources:
         Api:
           Type: "Api"
           Properties:
-            Path: "/api/v1/news"
+            Path: "/api/v1/news/{id}"
             Method: "get"
+
+  newsPut:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "cmd/newsPut"
+      Environment:
+        Variables:
+          API_KEY: !Ref APIKEY
+          APP_KEY: !Ref APPKEY
+          PRODUCTS_KEY: !Ref ProductsKEY
+      Events:
+        Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/news"
+            Method: "put"
+
+  newsDelete:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "cmd/newsDelete"
+      Environment:
+        Variables:
+          API_KEY: !Ref APIKEY
+          APP_KEY: !Ref APPKEY
+          PRODUCTS_KEY: !Ref ProductsKEY
+      Events:
+        Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/news/{id}"
+            Method: "delete"

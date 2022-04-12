@@ -16,6 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/aws/aws-sdk-go/service/dynamodb/expression"
 
 	"github.com/andre-karrlein/kreativroni-api/model"
 	"github.com/andre-karrlein/kreativroni-api/util"
@@ -52,8 +53,29 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 
 		return response, nil
 	}
+	id, ok := request.PathParameters["id"]
+	if ok && id != "" {
+		data, err := json.MarshalIndent(getSpecificNews(handler, id), "", "    ")
+		if err != nil {
+			handler.logger.Print("Failed to JSON marshal response.\nError: %w", err)
+			response.StatusCode = http.StatusInternalServerError
+			return response, nil
+		}
 
-	data, err := json.MarshalIndent(getAllNews(handler), "", "    ")
+		response.StatusCode = http.StatusOK
+		response.Body = string(data)
+
+		return response, nil
+	}
+
+	all := false
+
+	editor := request.QueryStringParameters["editor"]
+	if editor != "" {
+		all = true
+	}
+
+	data, err := json.MarshalIndent(getAllNews(handler, all), "", "    ")
 	if err != nil {
 		handler.logger.Print("Failed to JSON marshal response.\nError: %w", err)
 		response.StatusCode = http.StatusInternalServerError
@@ -66,7 +88,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 	return response, nil
 }
 
-func getAllNews(handler lambdaHandler) []model.News {
+func getAllNews(handler lambdaHandler, all bool) []model.News {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -74,9 +96,32 @@ func getAllNews(handler lambdaHandler) []model.News {
 	// Create DynamoDB client
 	svc := dynamodb.New(sess)
 
+	expr, err := expression.NewBuilder().WithFilter(
+		expression.Or(
+			expression.Equal(expression.Name("available"), expression.Value(true)),
+			expression.Equal(expression.Name("available"), expression.Value(false)),
+		),
+	).Build()
+	if err != nil {
+		panic(err)
+	}
+
+	if !all {
+		expr, err = expression.NewBuilder().WithFilter(
+			expression.Equal(expression.Name("available"), expression.Value(true)),
+		).Build()
+		if err != nil {
+			panic(err)
+		}
+	}
+
 	out, err := svc.Scan(&dynamodb.ScanInput{
-		TableName: aws.String("kreativroni.news"),
+		TableName:                 aws.String("kreativroni.news"),
+		FilterExpression:          expr.Filter(),
+		ExpressionAttributeNames:  expr.Names(),
+		ExpressionAttributeValues: expr.Values(),
 	})
+
 	if err != nil {
 		panic(err)
 	}
@@ -90,6 +135,37 @@ func getAllNews(handler lambdaHandler) []model.News {
 			panic(fmt.Sprintf("Failed to unmarshal Record, %v", err))
 		}
 		news = append(news, item)
+	}
+
+	return news
+}
+
+func getSpecificNews(handler lambdaHandler, id string) model.News {
+	sess := session.Must(session.NewSessionWithOptions(session.Options{
+		SharedConfigState: session.SharedConfigEnable,
+	}))
+
+	// Create DynamoDB client
+	svc := dynamodb.New(sess)
+
+	out, err := svc.GetItem(&dynamodb.GetItemInput{
+		TableName: aws.String("kreativroni.news"),
+		Key: map[string]*dynamodb.AttributeValue{
+			"id": {
+				S: aws.String(id),
+			},
+		},
+	})
+
+	if err != nil {
+		panic(err)
+	}
+
+	news := model.News{}
+
+	err = dynamodbattribute.UnmarshalMap(out.Item, &news)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to unmarshal Record, %v", err))
 	}
 
 	return news
