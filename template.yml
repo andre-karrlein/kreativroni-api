@@ -159,3 +159,56 @@ Resources:
           Properties:
             Path: "/api/v1/orders"
             Method: "put"
+
+  customers:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "cmd/customers"
+      Environment:
+        Variables:
+          API_KEY: !Ref APIKEY
+          APP_KEY: !Ref APPKEY
+          PRODUCTS_KEY: !Ref ProductsKEY
+      Events:
+        Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/customers"
+            Method: "get"
+        ApiParam:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/customers/{id}"
+            Method: "get"
+
+  customersPut:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "cmd/customersPut"
+      Environment:
+        Variables:
+          API_KEY: !Ref APIKEY
+          APP_KEY: !Ref APPKEY
+          PRODUCTS_KEY: !Ref ProductsKEY
+      Events:
+        Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/customers"
+            Method: "put"
+
+  customersDelete:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "cmd/customersDelete"
+      Environment:
+        Variables:
+          API_KEY: !Ref APIKEY
+          APP_KEY: !Ref APPKEY
+          PRODUCTS_KEY: !Ref ProductsKEY
+      Events:
+        Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/customers/{id}"
+            Method: "delete"

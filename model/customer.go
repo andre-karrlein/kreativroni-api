@@ -1,9 +1,10 @@
 package model
 
 type Customer struct {
-	ID             string `json:"id" firestore:"id,omitempty"`
-	CustomerNumber string `json:"customerNumber" firestore:"customerNumber,omitempty"`
-	Name           string `json:"name" firestore:"name,omitempty"`
-	Surname        string `json:"surname" firestore:"surname,omitempty"`
-	UserOrderId    string `json:"userOrderId" firestore:"userOrderId,omitempty"`
+	ID             string `json:"id"`
+	Sort_key       string `json:"sort_key"`
+	CustomerNumber string `json:"customerNumber"`
+	Name           string `json:"name"`
+	Surname        string `json:"surname"`
+	UserOrderId    string `json:"userOrderId"`
 }
