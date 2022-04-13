@@ -16,6 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/aws/aws-sdk-go/service/dynamodb/expression"
 
 	"github.com/andre-karrlein/kreativroni-api/model"
 	"github.com/andre-karrlein/kreativroni-api/util"
@@ -110,7 +111,7 @@ func getAllOrders(handler lambdaHandler) []model.Order {
 	return orders
 }
 
-func getSpecificOrder(handler lambdaHandler, id string) []model.Order {
+func getSpecificOrders(handler lambdaHandler, id string) []model.Order {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -118,13 +119,18 @@ func getSpecificOrder(handler lambdaHandler, id string) []model.Order {
 	// Create DynamoDB client
 	svc := dynamodb.New(sess)
 
-	out, err := svc.GetItem(&dynamodb.GetItemInput{
-		TableName: aws.String("kreativroni.orders"),
-		Key: map[string]*dynamodb.AttributeValue{
-			"user": {
-				S: aws.String(id),
-			},
-		},
+	expr, err := expression.NewBuilder().WithFilter(
+		expression.Equal(expression.Name("user"), expression.Value(id)),
+	).Build()
+	if err != nil {
+		panic(err)
+	}
+
+	out, err := svc.Scan(&dynamodb.ScanInput{
+		TableName:                 aws.String("kreativroni.orders"),
+		FilterExpression:          expr.Filter(),
+		ExpressionAttributeNames:  expr.Names(),
+		ExpressionAttributeValues: expr.Values(),
 	})
 
 	if err != nil {
