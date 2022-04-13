@@ -54,7 +54,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 	}
 	id, ok := request.PathParameters["id"]
 	if ok && id != "" {
-		data, err := json.MarshalIndent(getSpecificOrder(handler, id), "", "    ")
+		data, err := json.MarshalIndent(getSpecificOrders(handler, id), "", "    ")
 		if err != nil {
 			handler.logger.Print("Failed to JSON marshal response.\nError: %w", err)
 			response.StatusCode = http.StatusInternalServerError
@@ -110,7 +110,7 @@ func getAllOrders(handler lambdaHandler) []model.Order {
 	return orders
 }
 
-func getSpecificOrder(handler lambdaHandler, id string) model.Order {
+func getSpecificOrder(handler lambdaHandler, id string) []model.Order {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -131,12 +131,16 @@ func getSpecificOrder(handler lambdaHandler, id string) model.Order {
 		panic(err)
 	}
 
-	order := model.Order{}
+	orders := []model.Order{}
+	for _, s := range out.Items {
+		item := model.Order{}
 
-	err = dynamodbattribute.UnmarshalMap(out.Item, &order)
-	if err != nil {
-		panic(fmt.Sprintf("Failed to unmarshal Record, %v", err))
+		err = dynamodbattribute.UnmarshalMap(s, &item)
+		if err != nil {
+			panic(fmt.Sprintf("Failed to unmarshal Record, %v", err))
+		}
+		orders = append(orders, item)
 	}
 
-	return order
+	return orders
 }
