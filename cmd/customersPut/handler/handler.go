@@ -74,7 +74,7 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 	return response, nil
 }
 
-func saveCustomer(handler lambdaHandler, news model.Customer) error {
+func saveCustomer(handler lambdaHandler, customer model.Customer) error {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -82,9 +82,9 @@ func saveCustomer(handler lambdaHandler, news model.Customer) error {
 	// Create DynamoDB client
 	svc := dynamodb.New(sess)
 
-	av, err := dynamodbattribute.MarshalMap(news)
+	av, err := dynamodbattribute.MarshalMap(customer)
 	if err != nil {
-		log.Fatalf("Got error marshalling news item: %s", err)
+		log.Fatalf("Got error marshalling customer item: %s", err)
 		return err
 	}
 
