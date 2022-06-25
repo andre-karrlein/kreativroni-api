@@ -48,6 +48,25 @@ Resources:
           Properties:
             Path: "/api/v1/products"
             Method: "get"
+
+  products-import:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "cmd/products-import"
+      Environment:
+        Variables:
+          API_KEY: !Ref APIKEY
+          APP_KEY: !Ref APPKEY
+          PRODUCTS_KEY: !Ref ProductsKEY
+      Events:
+        ApiEvent:
+          Type: "HttpApi"
+        Api:
+          Type: "Api"
+          Properties:
+            Path: "/api/v1/import"
+            Method: "get"
+
   sections:
     Type: "AWS::Serverless::Function"
     Properties:

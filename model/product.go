@@ -49,3 +49,9 @@ type ListingData struct {
 	Count   int       `json:"count"`
 	Results []Listing `json:"results"`
 }
+
+type AwsProduct struct {
+	PK       string    `json:"PK"`
+	SK       string    `json:"SK"`
+	Products []Product `json:"products"`
+}
