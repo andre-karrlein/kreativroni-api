@@ -49,7 +49,7 @@ Resources:
             Path: "/api/v1/products"
             Method: "get"
 
-  products-import:
+  productsImport:
     Type: "AWS::Serverless::Function"
     Properties:
       CodeUri: "cmd/products-import"
