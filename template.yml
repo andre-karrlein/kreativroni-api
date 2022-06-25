@@ -59,8 +59,6 @@ Resources:
           APP_KEY: !Ref APPKEY
           PRODUCTS_KEY: !Ref ProductsKEY
       Events:
-        ApiEvent:
-          Type: "HttpApi"
         Api:
           Type: "Api"
           Properties:

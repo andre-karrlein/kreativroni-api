@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
+	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -60,7 +62,15 @@ func (handler lambdaHandler) Handle(ctx context.Context, request *events.APIGate
 		return response, nil
 	}
 
-	data, err := json.MarshalIndent(getProducts(handler, language), "", "    ")
+	var products []model.Product
+	new := request.QueryStringParameters["new"]
+	if new == "yes" {
+		products = getProducts(handler, language)
+	} else {
+		products = loadProducts(language)
+	}
+
+	data, err := json.MarshalIndent(products, "", "    ")
 	if err != nil {
 		handler.logger.Print("Failed to JSON marshal response.\nError: %w", err)
 		response.StatusCode = http.StatusInternalServerError
@@ -106,4 +116,42 @@ func getProducts(handler lambdaHandler, language string) []model.Product {
 	}
 
 	return products.Products
+}
+
+func loadProducts(language string) []model.Product {
+	b, err := util.Etsy_request("https://openapi.etsy.com/v3/application/shops/31340310/listings/active?limit=100")
+	if err != nil {
+		log.Println(err)
+		return nil
+	}
+	sb := string(b)
+
+	var listings model.ListingData
+	json.Unmarshal([]byte(sb), &listings)
+
+	var ids []string
+
+	for _, listing := range listings.Results {
+		ids = append(ids, strconv.Itoa(listing.Id))
+	}
+
+	id_string := strings.Join(ids[:], ",")
+
+	url := "https://openapi.etsy.com/v3/application/listings/batch?limit=100&includes=images&language=" + language + "&listing_ids=" + id_string
+	b, err = util.Etsy_request(url)
+	if err != nil {
+		log.Println(err)
+		return nil
+	}
+	sb = string(b)
+
+	var etsyData model.EtsyProductData
+	json.Unmarshal([]byte(sb), &etsyData)
+
+	var products []model.Product
+	for _, listingProduct := range etsyData.Results {
+		products = append(products, model.Product(listingProduct))
+	}
+
+	return products
 }
