@@ -93,6 +93,7 @@ func deleteCustomer(handler lambdaHandler, id string) error {
 
 	_, err := svc.DeleteItem(input)
 	if err != nil {
+		log.Println(id)
 		log.Fatalf("Got error calling DeleteItem: %s", err)
 		return err
 	}
