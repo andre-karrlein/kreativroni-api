@@ -22,12 +22,6 @@ Parameters:
   ProductsKEY:
     Type: "String"
 
-Globals:
-  Function:
-    Handler: "main"
-    Timeout: 10
-    Runtime: "provided.al2"
-
 
 Resources:
 
@@ -35,10 +29,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: products
       FunctionName: !Sub "products"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -61,6 +60,10 @@ Resources:
       CodeUri: .
       Handler: productsImport
       FunctionName: !Sub "productsImport"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -77,10 +80,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: sections
       FunctionName: !Sub "sections"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -97,10 +105,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: productVariations
       FunctionName: !Sub "productVariations"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -117,10 +130,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: sections
       FunctionName: !Sub "news"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -142,10 +160,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: newsPut
       FunctionName: !Sub "newsPut"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -162,10 +185,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: newsDelete
       FunctionName: !Sub "newsDelete"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -182,10 +210,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: orders
       FunctionName: !Sub "orders"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -207,10 +240,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: ordersPut
       FunctionName: !Sub "ordersPut"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -227,10 +265,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: customers
       FunctionName: !Sub "customers"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -252,10 +295,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: customersPut
       FunctionName: !Sub "customersPut"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -272,10 +320,15 @@ Resources:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
+      BuildMethod: go1.x 
     Properties:
       CodeUri: .
       Handler: customersDelete
       FunctionName: !Sub "customersDelete"
+      Timeout: 10
+      Runtime: "provided.al2"
+      Architecture:
+        - x86_64
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
