@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/lambda"
 
-	"github.com/andre-karrlein/kreativroni-api/cmd/product-variations/handler"
+	"github.com/andre-karrlein/kreativroni-api/cmd/productsImport/handler"
 )
 
 func main() {

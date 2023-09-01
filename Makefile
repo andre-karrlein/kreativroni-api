@@ -30,17 +30,17 @@ build-ordersPut:
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ordersPut cmd/ordersPut/main.go
 	mv ordersPut $(ARTIFACTS_DIR)
 
-build-product-variations:
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o product-variations cmd/product-variations/main.go
-	mv product-variations $(ARTIFACTS_DIR)
+build-productVariations:
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o productVariations cmd/productVariations/main.go
+	mv productVariations $(ARTIFACTS_DIR)
 
 build-products:
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o products cmd/products/main.go
 	mv products $(ARTIFACTS_DIR)
 
-build-products-import:
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o products-import cmd/products-import/main.go
-	mv products-import $(ARTIFACTS_DIR)
+build-productsImport:
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o productsImport cmd/productsImport/main.go
+	mv productsImport $(ARTIFACTS_DIR)
 
 build-sections:
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o sections cmd/sections/main.go

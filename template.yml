@@ -53,14 +53,14 @@ Resources:
             Path: "/api/v1/products"
             Method: "get"
 
-  products-import:
+  productsImport:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
     Properties:
       CodeUri: .
-      Handler: products-import
-      FunctionName: !Sub "products-import"
+      Handler: productsImport
+      FunctionName: !Sub "productsImport"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -93,14 +93,14 @@ Resources:
             Path: "/api/v1/sections"
             Method: "get"
 
-  product-variations:
+  productVariations:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
     Properties:
       CodeUri: .
-      Handler: product-variations
-      FunctionName: !Sub "product-variations"
+      Handler: productVariations
+      FunctionName: !Sub "productVariations"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
