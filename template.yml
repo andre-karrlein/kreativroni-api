@@ -33,8 +33,12 @@ Resources:
 
   products:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/products"
+      CodeUri: .
+      Handler: products
+      FunctionName: !Sub "products"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -51,8 +55,12 @@ Resources:
 
   productsImport:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/products-import"
+      CodeUri: .
+      Handler: products-import
+      FunctionName: !Sub "products-import"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -67,8 +75,12 @@ Resources:
 
   sections:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/sections"
+      CodeUri: .
+      Handler: sections
+      FunctionName: !Sub "sections"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -83,8 +95,12 @@ Resources:
 
   productVariations:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/product-variations"
+      CodeUri: .
+      Handler: product-variations
+      FunctionName: !Sub "product-variations"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -99,8 +115,12 @@ Resources:
 
   news:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/news"
+      CodeUri: .
+      Handler: sections
+      FunctionName: !Sub "news"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -120,8 +140,12 @@ Resources:
 
   newsPut:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/newsPut"
+      CodeUri: .
+      Handler: newsPut
+      FunctionName: !Sub "newsPut"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -136,8 +160,12 @@ Resources:
 
   newsDelete:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/newsDelete"
+      CodeUri: .
+      Handler: newsDelete
+      FunctionName: !Sub "newsDelete"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -152,8 +180,12 @@ Resources:
 
   orders:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/orders"
+      CodeUri: .
+      Handler: orders
+      FunctionName: !Sub "orders"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -173,8 +205,12 @@ Resources:
 
   ordersPut:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/ordersPut"
+      CodeUri: .
+      Handler: ordersPut
+      FunctionName: !Sub "ordersPut"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -189,8 +225,12 @@ Resources:
 
   customers:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/customers"
+      CodeUri: .
+      Handler: customers
+      FunctionName: !Sub "customers"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -210,8 +250,12 @@ Resources:
 
   customersPut:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/customersPut"
+      CodeUri: .
+      Handler: customersPut
+      FunctionName: !Sub "customersPut"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
@@ -226,8 +270,12 @@ Resources:
 
   customersDelete:
     Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
     Properties:
-      CodeUri: "cmd/customersDelete"
+      CodeUri: .
+      Handler: customersDelete
+      FunctionName: !Sub "customersDelete"
       Environment:
         Variables:
           API_KEY: !Ref APIKEY
