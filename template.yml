@@ -104,7 +104,7 @@ Resources:
     Metadata:
       BuildMethod: go1.x
     Properties:
-      CodeUri: cmd/productsVariations
+      CodeUri: cmd/productVariations
       Handler: productVariations
       FunctionName: !Sub "productVariations"
       Timeout: 10
