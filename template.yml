@@ -53,7 +53,7 @@ Resources:
             Path: "/api/v1/products"
             Method: "get"
 
-  productsImport:
+  products-import:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
@@ -93,7 +93,7 @@ Resources:
             Path: "/api/v1/sections"
             Method: "get"
 
-  productVariations:
+  product-variations:
     Type: "AWS::Serverless::Function"
     Metadata:
       BuildMethod: makefile
