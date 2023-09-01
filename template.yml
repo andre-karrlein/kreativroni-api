@@ -28,10 +28,9 @@ Resources:
   products:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
       BuildMethod: go1.x 
     Properties:
-      CodeUri: .
+      CodeUri: cmd/products
       Handler: products
       FunctionName: !Sub "products"
       Timeout: 10
@@ -55,9 +54,9 @@ Resources:
   productsImport:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/productsImport
       Handler: productsImport
       FunctionName: !Sub "productsImport"
       Timeout: 10
@@ -79,10 +78,9 @@ Resources:
   sections:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/sections
       Handler: sections
       FunctionName: !Sub "sections"
       Timeout: 10
@@ -104,10 +102,9 @@ Resources:
   productVariations:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/productsVariations
       Handler: productVariations
       FunctionName: !Sub "productVariations"
       Timeout: 10
@@ -129,10 +126,9 @@ Resources:
   news:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/news
       Handler: sections
       FunctionName: !Sub "news"
       Timeout: 10
@@ -159,10 +155,9 @@ Resources:
   newsPut:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/newsPut
       Handler: newsPut
       FunctionName: !Sub "newsPut"
       Timeout: 10
@@ -184,10 +179,9 @@ Resources:
   newsDelete:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/newsDelete
       Handler: newsDelete
       FunctionName: !Sub "newsDelete"
       Timeout: 10
@@ -209,10 +203,9 @@ Resources:
   orders:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/orders
       Handler: orders
       FunctionName: !Sub "orders"
       Timeout: 10
@@ -239,10 +232,9 @@ Resources:
   ordersPut:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/ordersPut
       Handler: ordersPut
       FunctionName: !Sub "ordersPut"
       Timeout: 10
@@ -264,10 +256,9 @@ Resources:
   customers:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/customers
       Handler: customers
       FunctionName: !Sub "customers"
       Timeout: 10
@@ -294,10 +285,9 @@ Resources:
   customersPut:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/customersPut
       Handler: customersPut
       FunctionName: !Sub "customersPut"
       Timeout: 10
@@ -319,10 +309,9 @@ Resources:
   customersDelete:
     Type: "AWS::Serverless::Function"
     Metadata:
-      BuildMethod: makefile
-      BuildMethod: go1.x 
+      BuildMethod: go1.x
     Properties:
-      CodeUri: .
+      CodeUri: cmd/customersDelete
       Handler: customersDelete
       FunctionName: !Sub "customersDelete"
       Timeout: 10
