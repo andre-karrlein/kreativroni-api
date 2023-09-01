@@ -36,7 +36,7 @@ Resources:
       FunctionName: !Sub "products"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -62,7 +62,7 @@ Resources:
       FunctionName: !Sub "productsImport"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -87,7 +87,7 @@ Resources:
       FunctionName: !Sub "sections"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -112,7 +112,7 @@ Resources:
       FunctionName: !Sub "productVariations"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -137,7 +137,7 @@ Resources:
       FunctionName: !Sub "news"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -167,7 +167,7 @@ Resources:
       FunctionName: !Sub "newsPut"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -192,7 +192,7 @@ Resources:
       FunctionName: !Sub "newsDelete"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -217,7 +217,7 @@ Resources:
       FunctionName: !Sub "orders"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -247,7 +247,7 @@ Resources:
       FunctionName: !Sub "ordersPut"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -272,7 +272,7 @@ Resources:
       FunctionName: !Sub "customers"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -302,7 +302,7 @@ Resources:
       FunctionName: !Sub "customersPut"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
@@ -327,7 +327,7 @@ Resources:
       FunctionName: !Sub "customersDelete"
       Timeout: 10
       Runtime: "provided.al2"
-      Architecture:
+      Architectures:
         - x86_64
       Environment:
         Variables:
